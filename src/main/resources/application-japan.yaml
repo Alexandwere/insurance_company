@@ -1,0 +1,7 @@
+app:
+  country: Japan
+  currency: yen
+  robbery-coefficient: 0.01
+  medical-coefficient: 0.015
+  robbery-add-money: 10000
+  medical-add-money: 12000

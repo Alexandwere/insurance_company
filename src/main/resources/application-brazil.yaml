@@ -1,0 +1,7 @@
+app:
+  country: Brazil
+  currency: real
+  robbery-coefficient: 0.05
+  medical-coefficient: 0.03
+  robbery-add-money: 300
+  medical-add-money: 800
