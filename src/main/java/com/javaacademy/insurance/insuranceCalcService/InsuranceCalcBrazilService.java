@@ -24,7 +24,7 @@ public class InsuranceCalcBrazilService implements InsuranceCalcService {
     private BigDecimal medicalAddMoney;
 
     @Override
-    public BigDecimal priceInsurance(@NonNull BigDecimal coverageAmount, @NonNull TypeOfInsurance type) {
+    public BigDecimal priceInsuranceContract(@NonNull BigDecimal coverageAmount, @NonNull TypeOfInsurance type) {
         if (type == ROBBERY_PROTECTION) {
             return coverageAmount.multiply(robberyCoefficient).add(robberyAddMoney);
         }

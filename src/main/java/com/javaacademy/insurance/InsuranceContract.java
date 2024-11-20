@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 
 @AllArgsConstructor
 @Getter
-@Setter
 @EqualsAndHashCode
 public class InsuranceContract {
     private String numberContract;
@@ -21,6 +20,6 @@ public class InsuranceContract {
     private String clientsFullName;
     private String country;
     private TypeOfInsurance typeOfInsurance;
+    @Setter
     private StatusOfContract statusOfContract;
-
 }

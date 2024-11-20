@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.javaacademy</groupId>
 	<artifactId>insurance</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>insurance</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -30,6 +30,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

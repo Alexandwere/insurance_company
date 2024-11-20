@@ -14,7 +14,12 @@ import static com.javaacademy.insurance.enums.TypeOfInsurance.ROBBERY_PROTECTION
 
 @SpringBootTest
 @ActiveProfiles("japan")
+@DisplayName("Успешный расчёт стоимости, Япония")
 public class InsuranceCalcJapanServiceTest {
+    private static final BigDecimal ROBBERY_COVERAGE = BigDecimal.valueOf(1_000_000);
+    private static final BigDecimal EXP_ROB_COV = BigDecimal.valueOf(20_000);
+    private static final BigDecimal MEDICAL_COVERAGE = BigDecimal.valueOf(10_000_000);
+    private static final BigDecimal EXP_MED_COV = BigDecimal.valueOf(162_000);
 
     @Autowired
     private InsuranceCalcJapanService insuranceCalcJapanService;
@@ -22,17 +27,13 @@ public class InsuranceCalcJapanServiceTest {
     @Test
     @DisplayName("Страховка от ограбления - успешный расчёт")
     public void successCountRobbery() {
-        BigDecimal coverage = BigDecimal.valueOf(1_000_000);
-        BigDecimal expected = BigDecimal.valueOf(20_000);
-        CalcServiceUtil.countPrice(insuranceCalcJapanService, coverage, expected, ROBBERY_PROTECTION);
+        CalcServiceUtil.countPrice(insuranceCalcJapanService, ROBBERY_COVERAGE, EXP_ROB_COV, ROBBERY_PROTECTION);
     }
 
     @Test
     @DisplayName("Медицинская страховка - успешный расчёт")
     public void successCountMedical() {
-        BigDecimal coverage = BigDecimal.valueOf(10_000_000);
-        BigDecimal expected = BigDecimal.valueOf(162_000);
-        CalcServiceUtil.countPrice(insuranceCalcJapanService, coverage, expected, MEDICAL);
+        CalcServiceUtil.countPrice(insuranceCalcJapanService, MEDICAL_COVERAGE, EXP_MED_COV, MEDICAL);
     }
 
 }

@@ -7,7 +7,7 @@ import com.javaacademy.insurance.enums.TypeOfInsurance;
 import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcJapanService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -20,25 +20,29 @@ import static com.javaacademy.insurance.enums.StatusOfContract.UNPAID;
 @Component
 @Profile("japan")
 @RequiredArgsConstructor
+@Slf4j
 public class InsuranceServiceJapan implements InsuranceService {
     @Value("${app.country}")
     private String country;
     @Value("${app.currency}")
     private String currency;
-    @Setter
     @NonNull
     private InsuranceCalcJapanService insuranceCalcJapanService;
-    @Setter
     @NonNull
     private Archive archive;
 
     @Override
-    public InsuranceContract giveOffer(BigDecimal coverageAmount, String clientsFullName, TypeOfInsurance type) {
+    public InsuranceContract giveOffer(@NonNull BigDecimal coverageAmount, @NonNull String clientsFullName,
+                                       @NonNull TypeOfInsurance type) {
         String numberContract = NumberGenerator.generateNumber();
-        if (archive.getArchive().containsKey(numberContract)) {
-            giveOffer(coverageAmount, clientsFullName, type);
+        try {
+            if (archive.getArchive().containsKey(numberContract)) {
+                giveOffer(coverageAmount, clientsFullName, type);
+            }
+        } catch (StackOverflowError error) {
+            throw new RuntimeException("Лимит данной серии договоров исчерпан. Требуется создание новой серии.");
         }
-        BigDecimal price = insuranceCalcJapanService.priceInsurance(coverageAmount, type);
+        BigDecimal price = insuranceCalcJapanService.priceInsuranceContract(coverageAmount, type);
         InsuranceContract contract = new InsuranceContract(numberContract, price, coverageAmount,
                 currency, clientsFullName, country, type, UNPAID);
         archive.getArchive().put(numberContract, contract);
@@ -46,7 +50,10 @@ public class InsuranceServiceJapan implements InsuranceService {
     }
 
     @Override
-    public InsuranceContract payContract(String numberContract) {
+    public InsuranceContract payContract(@NonNull String numberContract) {
+        if (archive.findContract(numberContract) == null) {
+            throw new RuntimeException("Такого договора не существует.");
+        }
         archive.findContract(numberContract).setStatusOfContract(PAID);
         return archive.getArchive().get(numberContract);
     }
