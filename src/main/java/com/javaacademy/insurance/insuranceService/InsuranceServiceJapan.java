@@ -4,7 +4,7 @@ import com.javaacademy.insurance.Archive;
 import com.javaacademy.insurance.InsuranceContract;
 import com.javaacademy.insurance.NumberGenerator;
 import com.javaacademy.insurance.enums.TypeOfInsurance;
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcJapanService;
+import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class InsuranceServiceJapan implements InsuranceService {
     @Value("${app.currency}")
     private String currency;
     @NonNull
-    private InsuranceCalcJapanService insuranceCalcJapanService;
+    private InsuranceCalcService insuranceCalcService;
     @NonNull
     private Archive archive;
 
@@ -42,7 +42,7 @@ public class InsuranceServiceJapan implements InsuranceService {
         } catch (StackOverflowError error) {
             throw new RuntimeException("Лимит данной серии договоров исчерпан. Требуется создание новой серии.");
         }
-        BigDecimal price = insuranceCalcJapanService.priceInsuranceContract(coverageAmount, type);
+        BigDecimal price = insuranceCalcService.priceInsuranceContract(coverageAmount, type);
         InsuranceContract contract = new InsuranceContract(numberContract, price, coverageAmount,
                 currency, clientsFullName, country, type, UNPAID);
         archive.getArchive().put(numberContract, contract);

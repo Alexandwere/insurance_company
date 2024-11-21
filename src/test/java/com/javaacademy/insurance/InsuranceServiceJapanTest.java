@@ -2,8 +2,8 @@ package com.javaacademy.insurance;
 
 import com.javaacademy.insurance.enums.StatusOfContract;
 import com.javaacademy.insurance.enums.TypeOfInsurance;
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcJapanService;
-import com.javaacademy.insurance.insuranceService.InsuranceServiceJapan;
+import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
+import com.javaacademy.insurance.insuranceService.InsuranceService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,11 +39,11 @@ public class InsuranceServiceJapanTest {
     private static final TypeOfInsurance TYPE2 = MEDICAL;
 
     @MockBean
-    private InsuranceCalcJapanService mockCalc;
+    private InsuranceCalcService mockCalc;
     @MockBean
     private Archive archive;
     @Autowired
-    private InsuranceServiceJapan insuranceServiceJapan;
+    private InsuranceService insuranceService;
 
     @Test
     @DisplayName("1 Предложение по страховке - успешное получение")
@@ -52,7 +52,7 @@ public class InsuranceServiceJapanTest {
         MockedStatic<NumberGenerator> mocked = Mockito.mockStatic(NumberGenerator.class);
             mocked.when(NumberGenerator::generateNumber).thenReturn(CONTRACT_NUMBER);
 
-        InsuranceContract result = insuranceServiceJapan.giveOffer(COVERAGE1, CLIENTS_FULL_NAME, TYPE1);
+        InsuranceContract result = insuranceService.giveOffer(COVERAGE1, CLIENTS_FULL_NAME, TYPE1);
         InsuranceContract expected = new InsuranceContract(CONTRACT_NUMBER, PRICE1, COVERAGE1, CURRENCY,
                 CLIENTS_FULL_NAME, COUNTRY, ROBBERY_PROTECTION, UNPAID);
         Assertions.assertEquals(expected, result);
@@ -66,7 +66,7 @@ public class InsuranceServiceJapanTest {
         MockedStatic<NumberGenerator> mocked = Mockito.mockStatic(NumberGenerator.class);
         mocked.when(NumberGenerator::generateNumber).thenReturn(CONTRACT_NUMBER);
 
-        InsuranceContract result = insuranceServiceJapan.giveOffer(COVERAGE2, CLIENTS_FULL_NAME, TYPE2);
+        InsuranceContract result = insuranceService.giveOffer(COVERAGE2, CLIENTS_FULL_NAME, TYPE2);
         InsuranceContract expected = new InsuranceContract(CONTRACT_NUMBER, PRICE2, COVERAGE2, CURRENCY,
                 CLIENTS_FULL_NAME, COUNTRY, MEDICAL, UNPAID);
         Assertions.assertEquals(expected, result);
@@ -80,9 +80,9 @@ public class InsuranceServiceJapanTest {
         MockedStatic<NumberGenerator> mocked = Mockito.mockStatic(NumberGenerator.class);
         mocked.when(NumberGenerator::generateNumber).thenReturn(CONTRACT_NUMBER);
 
-        InsuranceContract contract = insuranceServiceJapan.giveOffer(COVERAGE2, CLIENTS_FULL_NAME, TYPE2);
+        InsuranceContract contract = insuranceService.giveOffer(COVERAGE2, CLIENTS_FULL_NAME, TYPE2);
         Mockito.when(archive.findContract(CONTRACT_NUMBER)).thenReturn(contract);
-        InsuranceContract paidContract = insuranceServiceJapan.payContract(CONTRACT_NUMBER);
+        InsuranceContract paidContract = insuranceService.payContract(CONTRACT_NUMBER);
 
         StatusOfContract result = contract.getStatusOfContract();
         Assertions.assertEquals(PAID, result);

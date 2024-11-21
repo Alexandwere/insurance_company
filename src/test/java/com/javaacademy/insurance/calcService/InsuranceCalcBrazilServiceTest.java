@@ -1,6 +1,6 @@
 package com.javaacademy.insurance.calcService;
 
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcBrazilService;
+import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +23,18 @@ public class InsuranceCalcBrazilServiceTest {
 
 
     @Autowired
-    private InsuranceCalcBrazilService insuranceCalcBrazilService;
+    private InsuranceCalcService insuranceCalcService;
 
     @Test
     @DisplayName("Страховка от ограбления - успешный расчёт")
     public void successCountRobbery() {
-        CalcServiceUtil.countPrice(insuranceCalcBrazilService, ROBBERY_COVERAGE, EXP_ROB_COV, ROBBERY_PROTECTION);
+        CalcServiceUtil.countPrice(insuranceCalcService, ROBBERY_COVERAGE, EXP_ROB_COV, ROBBERY_PROTECTION);
     }
 
     @Test
     @DisplayName("Медицинская страховка - успешный расчёт")
     public void successCountMedical() {
-        CalcServiceUtil.countPrice(insuranceCalcBrazilService, MEDICAL_COVERAGE, EXP_MED_COV, MEDICAL);
+        CalcServiceUtil.countPrice(insuranceCalcService, MEDICAL_COVERAGE, EXP_MED_COV, MEDICAL);
     }
 
 }
