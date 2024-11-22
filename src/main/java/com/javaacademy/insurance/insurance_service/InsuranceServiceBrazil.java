@@ -1,10 +1,10 @@
-package com.javaacademy.insurance.insuranceService;
+package com.javaacademy.insurance.insurance_service;
 
 import com.javaacademy.insurance.Archive;
 import com.javaacademy.insurance.InsuranceContract;
 import com.javaacademy.insurance.NumberGenerator;
 import com.javaacademy.insurance.enums.TypeOfInsurance;
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
+import com.javaacademy.insurance.insurance_calc_service.InsuranceCalcService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

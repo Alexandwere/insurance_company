@@ -1,4 +1,4 @@
-package com.javaacademy.insurance.insuranceCalcService;
+package com.javaacademy.insurance.insurance_calc_service;
 
 import com.javaacademy.insurance.enums.TypeOfInsurance;
 import lombok.NonNull;

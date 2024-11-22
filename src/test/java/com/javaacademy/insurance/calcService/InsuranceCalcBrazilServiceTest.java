@@ -1,6 +1,6 @@
 package com.javaacademy.insurance.calcService;
 
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
+import com.javaacademy.insurance.insurance_calc_service.InsuranceCalcService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

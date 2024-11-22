@@ -2,8 +2,8 @@ package com.javaacademy.insurance;
 
 import com.javaacademy.insurance.enums.StatusOfContract;
 import com.javaacademy.insurance.enums.TypeOfInsurance;
-import com.javaacademy.insurance.insuranceCalcService.InsuranceCalcService;
-import com.javaacademy.insurance.insuranceService.InsuranceService;
+import com.javaacademy.insurance.insurance_calc_service.InsuranceCalcService;
+import com.javaacademy.insurance.insurance_service.InsuranceService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
